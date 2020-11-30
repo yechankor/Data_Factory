@@ -1,0 +1,323 @@
+############ 202002 의료기관################
+import urllib.request as req
+from urllib.request import urlopen
+from konlpy.tag import Kkma
+from konlpy.tag import Komoran
+from konlpy.tag import Hannanum
+from konlpy.tag import Okt
+from bs4 import BeautifulSoup
+import re
+import pandas as pd
+import numpy as np
+from pandas import Series, DataFrame
+from urllib.parse import quote # 아스키 문자로 변환해주는 함수
+import requests
+from urllib.request import HTTPError
+from urllib.parse import quote
+
+quote('의료기관')
+
+Kkma = Kkma()
+Komoran = Komoran()
+Hannanum = Hannanum()
+Okt = Okt()
+
+#==================================================================================
+# 2020년 2월 의료기관
+
+url = 'https://news.joins.com/Search/News?StartSearchDate=2020.02.01&EndSearchDate=2020.02.27&Keyword=%EC%9D%98%EB%A3%8C%EA%B8%B0%EA%B4%80&SortType=New&SearchCategoryType=News&PeriodType=DirectInput&ScopeType=All&ServiceCode=&SourceGroupType=&ReporterCode=&ImageType=All&JplusType=All&BlogType=All&ImageSearchType=Image&MatchKeyword=&IncludeKeyword=&ExcluedeKeyword='
+html = urlopen(url)
+soup = BeautifulSoup(html, 'html.parser')
+soup
+
+    
+# 의료기관 url
+urls = []
+for i in soup.select('h2.headline > a'):
+    urls.append(i['href'])
+
+urls
+
+
+
+texts = []
+for i in urls:
+    url = i
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+    try:
+        while True:
+            soup.select_one('div#article_body > div').replace_with("").text
+            if len(soup.select_one('div#article_body > div').replace_with("").text) == 0:
+                break
+    except Exception as err:
+        print(err)
+        pass
+    data = soup.select_one('div.article_body').text.strip()
+    texts.append(data)
+
+texts
+
+
+
+medi202002_medi = []
+
+for i in range(len(texts)) :
+    article = texts[i]
+    
+    sentences = article.split(". ")
+    
+    for setence_idx in range(len(sentences) -1) :
+        line = sentences[setence_idx].strip().replace(u'\xa0', u' ')
+        medi202002_medi.append(line)
+
+# 202002 의료기관
+medi202002_medi 
+
+############ 토큰화 ################
+# 2020년 2월 의료기관
+medi202002=[]
+for i in medi202002_medi:
+    x = i.replace(',', ' ')
+    x = x.replace('(', ' ')
+    x = x.replace(')', ' ')
+    x = x.replace('”', ' ')
+    x = x.replace('“', ' ')
+    x = x.replace('.', ' ')
+    x = x.replace('\'', ' ')
+    x = x.replace('▶', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('‘', ' ')
+    x = x.replace('’', ' ')
+    x = x.replace('"', ' ')
+    x = x.replace('?', ' ')
+    
+    medi202002.append(Okt.morphs(x))
+print(medi202002) # 2020년 2월 의료기관 기사 수집
+
+
+
+#==================================================================================
+# 2020년 3월 의료기관
+
+url = 'https://news.joins.com/Search/News?StartSearchDate=2020.03.01&EndSearchDate=2020.03.29&Keyword=%EC%9D%98%EB%A3%8C%EA%B8%B0%EA%B4%80&SortType=New&SearchCategoryType=News&PeriodType=DirectInput&ScopeType=All&ServiceCode=&SourceGroupType=&ReporterCode=&ImageType=All&JplusType=All&BlogType=All&ImageSearchType=Image&MatchKeyword=&IncludeKeyword=&ExcluedeKeyword='
+html = urlopen(url)
+soup = BeautifulSoup(html, 'html.parser')
+soup
+
+    
+# 의료기관 url
+urls = []
+for i in soup.select('h2.headline > a'):
+    urls.append(i['href'])
+
+urls
+
+
+
+texts = []
+for i in urls:
+    url = i
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+    try:
+        while True:
+            soup.select_one('div#article_body > div').replace_with("").text
+            if len(soup.select_one('div#article_body > div').replace_with("").text) == 0:
+                break
+    except Exception as err:
+        print(err)
+        pass
+    data = soup.select_one('div.article_body').text.strip()
+    texts.append(data)
+
+texts
+
+
+
+medi202003_medi = []
+
+for i in range(len(texts)) :
+    article = texts[i]
+    
+    sentences = article.split(". ")
+    
+    for setence_idx in range(len(sentences) -1) :
+        line = sentences[setence_idx].strip().replace(u'\xa0', u' ')
+        medi202003_medi.append(line)
+
+# 202003 의료기관
+medi202003_medi 
+
+############ 토큰화 ################
+# 2020년 3월 의료기관
+medi202003=[]
+for i in medi202003_medi:
+    x = i.replace(',', ' ')
+    x = x.replace('(', ' ')
+    x = x.replace(')', ' ')
+    x = x.replace('”', ' ')
+    x = x.replace('“', ' ')
+    x = x.replace('.', ' ')
+    x = x.replace('\'', ' ')
+    x = x.replace('▶', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('‘', ' ')
+    x = x.replace('’', ' ')
+    x = x.replace('"', ' ')
+    x = x.replace('?', ' ')
+    
+    medi202003.append(Okt.morphs(x))
+print(medi202003) # 2020년 3월 의료기관 기사 수집
+
+
+#==================================================================================
+# 2020년 4월 의료기관
+
+url = 'https://news.joins.com/Search/News?StartSearchDate=2020.04.01&EndSearchDate=2020.04.29&Keyword=%EC%9D%98%EB%A3%8C%EA%B8%B0%EA%B4%80&SortType=New&SearchCategoryType=News&PeriodType=DirectInput&ScopeType=All&ServiceCode=&SourceGroupType=&ReporterCode=&ImageType=All&JplusType=All&BlogType=All&ImageSearchType=Image&MatchKeyword=&IncludeKeyword=&ExcluedeKeyword='
+html = urlopen(url)
+soup = BeautifulSoup(html, 'html.parser')
+soup
+
+    
+# 의료기관 url
+urls = []
+for i in soup.select('h2.headline > a'):
+    urls.append(i['href'])
+
+urls
+
+
+
+texts = []
+for i in urls:
+    url = i
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+    try:
+        while True:
+            soup.select_one('div#article_body > div').replace_with("").text
+            if len(soup.select_one('div#article_body > div').replace_with("").text) == 0:
+                break
+    except Exception as err:
+        print(err)
+        pass
+    data = soup.select_one('div.article_body').text.strip()
+    texts.append(data)
+
+texts
+
+
+
+medi202004_medi = []
+
+for i in range(len(texts)) :
+    article = texts[i]
+    
+    sentences = article.split(". ")
+    
+    for setence_idx in range(len(sentences) -1) :
+        line = sentences[setence_idx].strip().replace(u'\xa0', u' ')
+        medi202004_medi.append(line)
+
+# 202004 의료기관
+medi202004_medi 
+
+############ 토큰화 ################
+# 2020년 4월 의료기관
+medi202004=[]
+for i in medi202004_medi:
+    x = i.replace(',', ' ')
+    x = x.replace('(', ' ')
+    x = x.replace(')', ' ')
+    x = x.replace('”', ' ')
+    x = x.replace('“', ' ')
+    x = x.replace('.', ' ')
+    x = x.replace('\'', ' ')
+    x = x.replace('▶', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('‘', ' ')
+    x = x.replace('’', ' ')
+    x = x.replace('"', ' ')
+    x = x.replace('?', ' ')
+    
+    medi202004.append(Okt.morphs(x))
+print(medi202004) # 2020년 4월 의료기관 기사 수집
+
+
+#==================================================================================
+# 2020년 5월 의료기관
+
+url = 'https://news.joins.com/Search/News?StartSearchDate=2020.05.01&EndSearchDate=2020.05.31&Keyword=%EC%9D%98%EB%A3%8C%EA%B8%B0%EA%B4%80&SortType=New&SearchCategoryType=News&PeriodType=DirectInput&ScopeType=All&ServiceCode=&SourceGroupType=&ReporterCode=&ImageType=All&JplusType=All&BlogType=All&ImageSearchType=Image&MatchKeyword=&IncludeKeyword=&ExcluedeKeyword='
+html = urlopen(url)
+soup = BeautifulSoup(html, 'html.parser')
+soup
+
+    
+# 의료기관 url
+urls = []
+for i in soup.select('h2.headline > a'):
+    urls.append(i['href'])
+
+urls
+
+
+
+texts = []
+for i in urls:
+    url = i
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+    try:
+        while True:
+            soup.select_one('div#article_body > div').replace_with("").text
+            if len(soup.select_one('div#article_body > div').replace_with("").text) == 0:
+                break
+    except Exception as err:
+        print(err)
+        pass
+    data = soup.select_one('div.article_body').text.strip()
+    texts.append(data)
+
+texts
+
+
+
+medi202005_medi = []
+
+for i in range(len(texts)) :
+    article = texts[i]
+    
+    sentences = article.split(". ")
+    
+    for setence_idx in range(len(sentences) -1) :
+        line = sentences[setence_idx].strip().replace(u'\xa0', u' ')
+        medi202005_medi.append(line)
+
+# 202005 의료기관
+medi202005_medi 
+
+############ 토큰화 ################
+# 2020년 5월 의료기관
+medi202005=[]
+for i in medi202005_medi:
+    x = i.replace(',', ' ')
+    x = x.replace('(', ' ')
+    x = x.replace(')', ' ')
+    x = x.replace('”', ' ')
+    x = x.replace('“', ' ')
+    x = x.replace('.', ' ')
+    x = x.replace('\'', ' ')
+    x = x.replace('▶', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('‘', ' ')
+    x = x.replace('’', ' ')
+    x = x.replace('"', ' ')
+    x = x.replace('?', ' ')
+    
+    medi202005.append(Okt.morphs(x))
+print(medi202005) # 2020년 5월 의료기관 기사 수집

@@ -1,0 +1,314 @@
+############ 201902 숙박################
+
+url = 'https://news.joins.com/Search/JoongangNews?StartSearchDate=2019.02.01&EndSearchDate=2019.02.28&Keyword=%EC%88%99%EB%B0%95&SortType=New&SearchCategoryType=JoongangNews&PeriodType=DirectInput&ScopeType=All&ServiceCode=&SourceGroupType=&ReporterCode=&ImageType=All&JplusType=All&BlogType=All&ImageSearchType=Image&MatchKeyword=&IncludeKeyword=&ExcluedeKeyword='
+html = urlopen(url)
+soup = BeautifulSoup(html, 'html.parser')
+soup
+
+    
+# 숙박 url
+urls = []
+for i in soup.select('h2.headline > a'):
+    urls.append(i['href'])
+
+urls
+
+
+
+texts = []
+for i in urls:
+    url = i
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+    try:
+        while True:
+            soup.select_one('div.article_body > div').replace_with("").text
+            if len(soup.select_one('div.article_body > div').replace_with("").text) == 0:
+                break
+    except Exception as err:
+        print(err)
+        pass
+    data = soup.select_one('div.article_body').text.strip()
+    texts.append(data)
+
+texts
+
+
+
+
+lines201902_s = []
+
+for i in range(len(texts)) :
+    article = texts[i]
+    
+    sentences = article.split(". ")
+    
+    for setence_idx in range(len(sentences) -1) :
+        line = sentences[setence_idx].strip().replace(u'\xa0', u' ')
+        lines201902_s.append(line)
+
+
+# 201902 숙박 
+lines201902_s 
+
+
+#################토큰화####################
+# 2019년 2월 숙박
+stay201902=[]
+for i in lines201902_s:
+    x = i.replace(',', ' ')
+    x = x.replace('(', ' ')
+    x = x.replace(')', ' ')
+    x = x.replace('”', ' ')
+    x = x.replace('“', ' ')
+    x = x.replace('.', ' ')
+    x = x.replace('\'', ' ')
+    x = x.replace('▶', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('‘', ' ')
+    x = x.replace('’', ' ')
+    x = x.replace('"', ' ')
+    x = x.replace('?', ' ')
+    
+    
+    stay201902.append(okt.morphs(x))
+print(stay201902)
+
+
+
+===============================================
+
+############ 201903 숙박################
+
+url = 'https://news.joins.com/Search/JoongangNews?StartSearchDate=2019.03.01&EndSearchDate=2019.03.30&Keyword=%EC%88%99%EB%B0%95&SortType=New&SearchCategoryType=JoongangNews&PeriodType=DirectInput&ScopeType=All&ServiceCode=&SourceGroupType=&ReporterCode=&ImageType=All&JplusType=All&BlogType=All&ImageSearchType=Image&MatchKeyword=&IncludeKeyword=&ExcluedeKeyword='
+html = urlopen(url)
+soup = BeautifulSoup(html, 'html.parser')
+soup
+
+    
+# 숙박 url
+urls = []
+for i in soup.select('h2.headline > a'):
+    urls.append(i['href'])
+
+urls
+
+
+
+texts = []
+for i in urls:
+    url = i
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+    try:
+        while True:
+            soup.select_one('div.article_body > div').replace_with("").text
+            if len(soup.select_one('div.article_body > div').replace_with("").text) == 0:
+                break
+    except Exception as err:
+        print(err)
+        pass
+    data = soup.select_one('div.article_body').text.strip()
+    texts.append(data)
+
+texts
+
+
+
+lines201903_s = []
+
+for i in range(len(texts)) :
+    article = texts[i]
+    
+    sentences = article.split(". ")
+    
+    for setence_idx in range(len(sentences) -1) :
+        line = sentences[setence_idx].strip().replace(u'\xa0', u' ')
+        lines201903_s.append(line)
+
+    
+# 201903 숙박
+lines201903_s 
+
+
+#################토큰화####################
+# 2019년 3월 숙박
+stay201903=[]
+for i in lines201903_s:
+    x = i.replace(',', ' ')
+    x = x.replace('(', ' ')
+    x = x.replace(')', ' ')
+    x = x.replace('”', ' ')
+    x = x.replace('“', ' ')
+    x = x.replace('.', ' ')
+    x = x.replace('\'', ' ')
+    x = x.replace('▶', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('‘', ' ')
+    x = x.replace('’', ' ')
+    x = x.replace('"', ' ')
+    x = x.replace('?', ' ')
+    
+    
+    stay201903.append(okt.morphs(x))
+print(stay201903)
+
+
+
+=========================================
+
+############ 201904 숙박################
+
+url = 'https://news.joins.com/Search/JoongangNews?StartSearchDate=2019.04.01&EndSearchDate=2019.04.30&Keyword=%EC%88%99%EB%B0%95&SortType=New&SearchCategoryType=JoongangNews&PeriodType=DirectInput&ScopeType=All&ServiceCode=&SourceGroupType=&ReporterCode=&ImageType=All&JplusType=All&BlogType=All&ImageSearchType=Image&MatchKeyword=&IncludeKeyword=&ExcluedeKeyword='
+html = urlopen(url)
+soup = BeautifulSoup(html, 'html.parser')
+soup
+
+    
+# 숙박 url
+urls = []
+for i in soup.select('h2.headline > a'):
+    urls.append(i['href'])
+
+urls
+
+
+
+texts = []
+for i in urls:
+    url = i
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+    try:
+        while True:
+            soup.select_one('div.article_body > div').replace_with("").text
+            if len(soup.select_one('div.article_body > div').replace_with("").text) == 0:
+                break
+    except Exception as err:
+        print(err)
+        pass
+    data = soup.select_one('div.article_body').text.strip()
+    texts.append(data)
+
+texts
+
+
+
+lines201904_s = []
+
+for i in range(len(texts)) :
+    article = texts[i]
+    
+    sentences = article.split(". ")
+    
+    for setence_idx in range(len(sentences) -1) :
+        line = sentences[setence_idx].strip().replace(u'\xa0', u' ')
+        lines201904_s.append(line)
+
+# 201904 숙박
+lines201904_s 
+
+
+#################토큰화####################
+# 2019년 4월 숙박
+stay201904=[]
+for i in lines201904_s:
+    x = i.replace(',', ' ')
+    x = x.replace('(', ' ')
+    x = x.replace(')', ' ')
+    x = x.replace('”', ' ')
+    x = x.replace('“', ' ')
+    x = x.replace('.', ' ')
+    x = x.replace('\'', ' ')
+    x = x.replace('▶', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('‘', ' ')
+    x = x.replace('’', ' ')
+    x = x.replace('"', ' ')
+    x = x.replace('?', ' ')
+    
+    
+    stay201904.append(okt.morphs(x))
+print(stay201904)
+
+
+
+==================================================================
+
+############ 201905 숙박################
+
+url = 'https://news.joins.com/Search/JoongangNews?StartSearchDate=2019.05.01&EndSearchDate=2019.05.31&Keyword=%EC%88%99%EB%B0%95&SortType=New&SearchCategoryType=JoongangNews&PeriodType=DirectInput&ScopeType=All&ServiceCode=&SourceGroupType=&ReporterCode=&ImageType=All&JplusType=All&BlogType=All&ImageSearchType=Image&MatchKeyword=&IncludeKeyword=&ExcluedeKeyword='
+html = urlopen(url)
+soup = BeautifulSoup(html, 'html.parser')
+soup
+
+    
+# 숙박 url
+urls = []
+for i in soup.select('h2.headline > a'):
+    urls.append(i['href'])
+
+urls
+
+
+
+texts = []
+for i in urls:
+    url = i
+    html = urlopen(url)
+    soup = BeautifulSoup(html, "html.parser")
+    try:
+        while True:
+            soup.select_one('div.article_body > div').replace_with("").text
+            if len(soup.select_one('div.article_body > div').replace_with("").text) == 0:
+                break
+    except Exception as err:
+        print(err)
+        pass
+    data = soup.select_one('div.article_body').text.strip()
+    texts.append(data)
+
+texts
+
+
+
+lines201905_s = []
+
+for i in range(len(texts)) :
+    article = texts[i]
+    
+    sentences = article.split(". ")
+    
+    for setence_idx in range(len(sentences) -1) :
+        line = sentences[setence_idx].strip().replace(u'\xa0', u' ')
+        lines201905_s.append(line)
+
+# 201905 숙박
+lines201905_s
+
+#################토큰화####################
+# 2019년 5월 숙박
+stay201905=[]
+for i in lines201905_s:
+    x = i.replace(',', ' ')
+    x = x.replace('(', ' ')
+    x = x.replace(')', ' ')
+    x = x.replace('”', ' ')
+    x = x.replace('“', ' ')
+    x = x.replace('.', ' ')
+    x = x.replace('\'', ' ')
+    x = x.replace('▶', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('·', ' ')
+    x = x.replace('‘', ' ')
+    x = x.replace('’', ' ')
+    x = x.replace('"', ' ')
+    x = x.replace('?', ' ')
+    
+    
+    stay201905.append(okt.morphs(x))
+print(stay201905)
+
